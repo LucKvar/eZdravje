@@ -1,0 +1,17 @@
+.navbar {
+    background-color: #0080ff;
+}
+.navbar a {
+    color: #fff;
+}
+
+.navbar a:hover {
+    background-color: transparent !important;
+    color: #00284d;
+    text-decoration: underline;
+}
+
+#gumbEHR {
+    margin-top: 10px;
+    padding: 5px;
+}
