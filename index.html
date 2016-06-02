@@ -42,10 +42,9 @@
   <div class="container">
     <div class="page-header"><h2>Vnos uporabnika</h2></div>
 		<div class="row">
-		    <div class="col-lg-3 col-md-3 col-sm-3"></div>
-			<div id="okno1" class="col-lg-6 col-md-8 col-sm-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
+			<div id="dodaj" class="col-lg-6 col-md-6 col-sm-6">
+				<div id="okvircek" class="panel panel-default">
+					<div id="okvircek" class="panel-heading">
 						<div class="row center-block">
 							<div class="col-lg-8 col-md-8 col-sm-8"><b>Kreiraj EHR zapis</b> za novega uporabnika</div>
 							<div class="col-lg-4 col-md-4 col-sm-4"><select class="form-control input-sm" id="preberiPredlogoBolnika"><option value=""></option><option value="Pujsa,Pepa,1938-10-30T14:58,Ženski">Pujsa Pepa</option></select></div>
@@ -60,7 +59,57 @@
 				  	</div>
 				</div>
 			</div>
+			<div id="prijava" class="col-lg-6 col-md-6 col-sm-6">
+				<div id="okvircek" class="panel panel-default">
+					<div id="okvircek" class="panel-heading">
+						<div class="row center-block">
+							<div class="col-lg-8 col-md-8 col-sm-8"><b>Shranjeni</b> uporabniki</div>
+						</div>
+					</div>
+					<div class="panel-body">
+						<span class="label label-default">Shranjeni uporabniki</span><select class="form-control" id="user"><option value=""></option></select>
+						<span class="label label-default">EHR ID</span><input id="preberiEHRid" type="text" class="form-control input-mini" placeholder="7b661e12-3a98-21ad-c29e-2dc9f5a3d885">
+						<button id="dodajPodatke" type="button" class="btn btn-primary btn-xs" onclick="preberiEHRodBolnika()">Preberi podatke o uporabniku</button><span id="preberiSporocilo"></span>
+				  </div>
+				</div>
+			</div>
 		</div>
+			<div class="row">
+			<div id="vnosPodatkov" style="display: none" class="col-lg-6 col-md-6 col-sm-6">
+				<div id="okvircek" class="panel panel-default">
+					<div id="okvircek" class="panel-heading">
+						<div class="row">
+							<div class="col-lg-8 col-md-8 col-sm-8"><b>Vnos</b> meritev uporabnika</div>
+						</div>
+					</div>
+					<div class="panel-body">
+						<span class="label label-default">EHR ID</span><input id="preberiEHRid" type="text" class="form-control input-mini" placeholder="7b661e12-3a98-21ad-c29e-2dc9f5a3d885">
+						<span class="label label-default">Datum in ura</span><input id="dodajVitalnoDatumInUra" type="text" class="form-control input-mini" placeholder="2014-11-21T11:40Z">
+						<span class="label label-default">Telesna višina</span><div class="input-group"><input id="dodajVitalnoTelesnaVisina" type="text" class="form-control input-mini" placeholder="185"><span class="input-group-addon">cm</span></div>
+						<span class="label label-default">Telesna teža</span><div class="input-group"><input id="dodajVitalnoTelesnaTeza" type="text" class="form-control input-mini" placeholder="80.00"><span class="input-group-addon">kg</span></div>
+						<span class="label label-default">Telesna temperatura</span><div class="input-group"><input id="dodajVitalnoTelesnaTemperatura" type="text" class="form-control input-mini" placeholder="36.50"><span class="input-group-addon">°C</span></div>
+						<span class="label label-default">Sistolični krvni tlak</span><div class="input-group"><input id="dodajVitalnoKrvniTlakSistolicni" type="text" class="form-control input-mini" placeholder="118"><span class="input-group-addon">mm Hg</span></div>
+						<span class="label label-default">Diastolični krvni tlak</span><div class="input-group"><input id="dodajVitalnoKrvniTlakDiastolicni" type="text" class="form-control input-mini" placeholder="92"><span class="input-group-addon">mm Hg</span></div>
+						<span class="label label-default">Nasičenost krvi s kisikom</span><div class="input-group"><input id="dodajVitalnoNasicenostKrviSKisikom" type="text" class="form-control input-mini" placeholder="98"><span class="input-group-addon">%</span></div>
+						<span class="label label-default">Merilec</span><input id="dodajVitalnoMerilec" type="text" class="form-control input-mini" placeholder="medicinska sestra Hrastova Micka">
+						<button id="gumbEHR" type="button" class="btn btn-primary btn-xs" onclick="dodajMeritveVitalnihZnakov()">Dodaj meritve vitalnih znakov</button><span id="dodajMeritveVitalnihZnakovSporocilo"></span>
+				  	</div>
+				</div>
+			</div>
+			<div id="pregledPodatkov" style="display: none" class="col-lg-6 col-md-6 col-sm-6">
+				<div id="okvircek" class="panel panel-default">
+					<div id="okvircek" class="panel-heading">
+						<div class="row">
+							<div class="col-lg-6 col-md-6 col-sm-6"><b>Pregled</b> meritev uporabnika</div>
+						</div>
+					</div>
+					<div class="panel-body">
+						<span class="label label-default">EHR ID</span><input id="meritveVitalnihZnakovEHRid" type="text" class="form-control input-mini" placeholder="7b661e12-3a98-21ad-c29e-2dc9f5a3d885">
+						<button type="button" id="dodajPodatke" class="btn btn-primary btn-xs" onclick="preberiMeritveVitalnihZnakov()">Preberi meritve vitalnih znakov</button><span id="preberiMeritveVitalnihZnakovSporocilo"></span>
+						<div id="rezultatMeritveVitalnihZnakov"></div>
+				  	</div>
+				</div>
+			</div>
   </div>
 </body>
 </html>

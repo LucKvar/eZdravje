@@ -22,7 +22,7 @@ function getSessionId() {
 }
 
 $(document).ready(function() {
-
+    
   /**
    * Napolni testne vrednosti (ime, priimek in datum rojstva) pri kreiranju
    * EHR zapisa za novega bolnika, ko uporabnik izbere vrednost iz
@@ -36,6 +36,28 @@ $(document).ready(function() {
     $("#kreirajSpol").val(podatki[3]);
     $("#kreirajDatumRojstva").val(podatki[2]);
   });
+  
+  parseCookie();
+  
+  /**
+   * Napolni testni EHR ID pri prebiranju EHR zapisa obstoječega bolnika,
+   * ko uporabnik izbere vrednost iz padajočega menuja
+   * (npr. Dejan Lavbič, Pujsa Pepa, Ata Smrk)
+   */
+	$('#user').change(function() {
+		$("#preberiSporocilo").html("");
+		$("#preberiEHRid").val($(this).val());
+	});
+	
+	$("#dodajPodatke").click(function(){
+        $("#vnosPodatkov").css("display", "block");
+    });
+  
+  $("#dodajPodatke").click(function(){
+        $("#pregledPodatkov").css("display", "block");
+    });
+
+
 });
 
 /**
@@ -53,6 +75,7 @@ function kreirajEHRzaBolnika() {
 	        case 'Ženski':
 	            spol = 'FEMALE';
 	            break;
+	            
 	        case 'Moški':
 	            spol = 'MALE';
 	            break;
@@ -97,7 +120,10 @@ function kreirajEHRzaBolnika() {
 		                    $("#kreirajSporocilo").html("<span class='obvestilo " +
                           "label label-success fade-in'>Uspešno kreiran EHR '" +
                           ehrId + "'.</span>");
-		                    $("#preberiEHRid").val(ehrId);
+		                    //$("#preberiEHRid").val(ehrId);
+		                  var value = dodajToCookie() + ime + "," + priimek + "," + ehrId + "|";
+		                  createCookie("EhrPodatek", value, 60);
+		                  parseCookie();
 		                }
 		            },
 		            error: function(err) {
@@ -128,5 +154,62 @@ function generirajPodatke(stPacienta) {
 }
 
 
-// TODO: Tukaj implementirate funkcionalnost, ki jo podpira vaša aplikacija
+function createCookie(name, value, expires, path, domain) {
+  var cookie = name + "=" + escape(value) + ";";
 
+  if (expires) {
+    // If it's a date
+    if(expires instanceof Date) {
+      // If it isn't a valid date
+      if (isNaN(expires.getTime()))
+       expires = new Date();
+    }
+    else
+      expires = new Date(new Date().getTime() + parseInt(expires) * 1000 * 60 * 60 * 24);
+
+    cookie += "expires=" + expires.toGMTString() + ";";
+  }
+
+  if (path)
+    cookie += "path=" + path + ";";
+  if (domain)
+    cookie += "domain=" + domain + ";";
+
+  document.cookie = cookie;
+}
+
+function getCookie(name) {
+  var regexp = new RegExp("(?:^" + name + "|;\s*"+ name + ")=(.*?)(?:;|$)", "g");
+  var result = regexp.exec(document.cookie);
+  return (result === null) ? null : result[1];
+}
+
+function parseCookie() {
+    $("#user").empty();
+    var current = getCookie("EhrPodatek");
+    if(current) {
+      current = current.replace(/%7C/g,"|");
+        var a = current.split("|");
+        
+        a.forEach(function (c) {
+            if(c) {
+              c = c.replace(/%2C/g,",");
+              var data = c.split(","); //ime,priimek,ehr
+              //<option value="Moški/Ženski"></option>
+              var output = '<option value="'+ data[2] + '">' + data[0] + ' ' + data[1] + '</option>';
+              $("#user").append(output);
+            }
+        });
+    }
+}
+
+function dodajToCookie() {
+    var current = getCookie("EhrPodatek");
+    if(current) {
+        current = current.replace(/%7C/g,"|");
+        current = current.replace(/%2C/g,",");
+        return current;
+    } else {
+        return "";
+    }
+}
