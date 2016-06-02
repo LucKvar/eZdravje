@@ -29,6 +29,7 @@
           <li><a href="pomoc.html">Pomoč uporabnikom</a></li>
           <li><a href="opis.html">Opis ideje</a></li>
           <li><a href="nacrt.html">Načrt informacijske rešitve</a></li>
+          <li><a href="googlemaps.html">mapa</a></li>
         </ul>
       </div>
     </div>
@@ -66,44 +67,34 @@
         </div>
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="panel-title">O Fitness Tracker</h3>
+            <h3 class="panel-title">Fitness Tracker</h3>
           </div>
-          <div class="panel-body">
-            <div id="dodaj" class="col-lg-4 col-md-8 col-sm-12">
-				<div id="okvircek" class="panel panel-default">
-					<div id="okvircek" class="panel-heading">
-						<div class="row center-block">
-							<div class="col-lg-8 col-md-8 col-sm-8"><b>Twitter: </b></div>
+          <div id="pregledPodatkov" class="col-lg-4 col-md-8 col-sm-12">
+				<div id="okvircekPomoc" class="panel panel-default">
+					<div id="okvircekPomoc" class="panel-heading">
+						<div class="row">
+							<div class="col-lg-6 col-md-6 col-sm-6"><b>Twitter: </b></div>
 						</div>
 					</div>
 					<div class="panel-body">
-						<span class="label label-default">Ime</span><input id="kreirajIme" type="text" class="form-control input-mini" placeholder="Janez">
-						<span class="label label-default">Priimek</span><input id="kreirajPriimek" type="text" class="form-control" placeholder="Kranjski">
-						<span class="label label-default">Spol</span><select class="form-control" id="kreirajSpol"><option value="Moški/Ženski"></option><option value="Moški">Moški</option><option value="Ženski">Ženski</option><option value="Drugo">Drugo</option></select>
-						<span class="label label-default">Datum rojstva</span><input id="kreirajDatumRojstva" type="text" class="form-control" placeholder="1957-03-10T09:08">
-						<button id="gumbEHR" type="button" class="btn btn-primary btn-xs" onclick="kreirajEHRzaBolnika()">Dodaj osnovne podatke o uporabniku</button><span id="kreirajSporocilo"></span>
+						<a class="twitter-timeline" href="https://twitter.com/hashtag/fitnessTracker" data-widget-id="738377715812798465">#fitnessTracker Tweets</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
 				  	</div>
 				</div>
 			</div>
-        </div>
-        <div class="panel-body">
-            <div id="dodaj" class="col-lg-6 col-md-6 col-sm-6">
-				<div id="okvircek" class="panel panel-default">
-					<div id="okvircek" class="panel-heading">
-						<div class="row center-block">
-							<div class="col-lg-8 col-md-8 col-sm-8"><b>Twitter: </b></div>
+        <div id="pregledPodatkov" class="col-lg-8 col-md-6 col-sm-6">
+				<div id="okvircekPomoc" class="panel panel-default">
+					<div id="okvircekPomoc" class="panel-heading">
+						<div class="row">
+							<div class="col-lg-6 col-md-6 col-sm-6"><b>Fitnesi: </b></div>
 						</div>
 					</div>
 					<div class="panel-body">
-						<span class="label label-default">Ime</span><input id="kreirajIme" type="text" class="form-control input-mini" placeholder="Janez">
-						<span class="label label-default">Priimek</span><input id="kreirajPriimek" type="text" class="form-control" placeholder="Kranjski">
-						<span class="label label-default">Spol</span><select class="form-control" id="kreirajSpol"><option value="Moški/Ženski"></option><option value="Moški">Moški</option><option value="Ženski">Ženski</option><option value="Drugo">Drugo</option></select>
-						<span class="label label-default">Datum rojstva</span><input id="kreirajDatumRojstva" type="text" class="form-control" placeholder="1957-03-10T09:08">
-						<button id="gumbEHR" type="button" class="btn btn-primary btn-xs" onclick="kreirajEHRzaBolnika()">Dodaj osnovne podatke o uporabniku</button><span id="kreirajSporocilo"></span>
+						<iframe src="googlemaps.html" class="col-lg-12 col-md-12 col-sm-12" height="350"></iframe>
 				  	</div>
 				</div>
 			</div>
-        </div>
       </div>
     </div>
   </div>
