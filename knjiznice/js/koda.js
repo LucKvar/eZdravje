@@ -66,13 +66,47 @@ $(document).ready(function() {
 		$("#meritveVitalnihZnakovEHRid").val($(this).val());
 	});
 	
+	$('#user').change(function() {
+		$("#preberiSporocilo").html("");
+		$("#grafEhr").val($(this).val());
+	});
+	
+// <------------Prikazi okvircke------------------->
+	
+	//Dodaj uporabnika
+	$("#gumbDodajUporabnika").click(function(){
+        $("#dodaj").css("display", "block");
+    });
+	
+	//Vnos uporabnika
 	$("#dodajPodatke").click(function(){
         $("#vnosPodatkov").css("display", "block");
     });
-  
-  $("#dodajPodatke").click(function(){
-        $("#pregledPodatkov").css("display", "block");
+    
+    //pregled Podatkov
+	  $("#dodajPodatke").click(function(){
+	        $("#pregledPodatkov").css("display", "block");
+	    });
+    
+    //pregled Grafa
+	  $("#gumbGraf").click(function(){
+	        $("#graf_okvir").css("display", "block");
+	    });
+	    
+	    
+// <------------Skrij okvircke------------------->
+	 $("#gumbEHR").click(function(){
+	        $("#dodaj").css("display", "none");
+	    });
+	    
+	 $("#gumbDodajMeritve").click(function(){
+	        $("#graf_okvir").css("display", "none");
+	    });
+	    
+    $("#dodajPodatke").click(function(){
+        $("#dodaj").css("display", "none");
     });
+    
     
   /**
    * Napolni testne vrednosti (EHR ID, datum in ura, telesna višina,
@@ -179,6 +213,13 @@ function kreirajEHRzaBolnika() {
 		    }
 		});
 	}
+	
+	//praznjenje okvirčkov s podatki
+    $("#kreirajSporocilo").html("");
+    $("#kreirajIme").val("");
+    $("#kreirajPriimek").val("");
+    $("#kreirajSpol").val("");
+    $("#kreirajDatumRojstva").val("");
 }
 
 /**
@@ -230,6 +271,14 @@ function getCookie(name) {
 
 function parseCookie() {
     $("#user").empty();
+    /*
+    //TODO
+    var output = '<option value="'+ ehr + '">' +ime in priimek + ' ' + data[1] + '</option>';
+    $("#user").append(output);
+    
+    */
+    $("#user").append('<option value="">Izberi uporabnika...</option>');
+    
     var current = getCookie("EhrPodatek");
     if(current) {
       current = current.replace(/%7C/g,"|");
@@ -312,6 +361,10 @@ function dodajMeritveVitalnihZnakov() {
 	}
 }
 
+var podatki_graf = {
+	weight: null,
+	height: null
+};
 
 /**
  * Pridobivanje vseh zgodovinskih podatkov meritev izbranih vitalnih znakov
@@ -320,6 +373,8 @@ function dodajMeritveVitalnihZnakov() {
  * za napredno iskanje po zdravstvenih podatkih.
  */
 function preberiMeritveVitalnihZnakov() {
+	$("#preberiMeritveVitalnihZnakovSporocilo").empty();
+	
 	sessionId = getSessionId();
 
 	var ehrId = $("#meritveVitalnihZnakovEHRid").val();
@@ -335,14 +390,18 @@ function preberiMeritveVitalnihZnakov() {
 	    	success: function (data) {
 				var party = data.party;
 				$("#rezultatMeritveVitalnihZnakov").html("<br/><span>Pridobivanje " +
-          "podatkov za <b>'" + "Telesno težo" + "'</b> uporabnika <b>'" + party.firstNames +
-          " " + party.lastNames + "'</b>.</span><br/><br/>");
+          "podatkov za uporabnika <b>" + party.firstNames +
+          " " + party.lastNames + "</b>.</span><br/><br/>");
+          
+        			
 					$.ajax({
 					    url: baseUrl + "/view/" + ehrId + "/" + "weight",
 					    type: 'GET',
 					    headers: {"Ehr-Session": sessionId},
 					    success: function (res) {
 					    	if (res.length > 0) {
+					    		podatki_graf.weight = res;
+					    		
 					  var results = "<table id='tabelaPodatkov' class='table table-striped " +
                     "'><tr><th>Datum in ura</th>" + 
                     "<th class='text-right'>Telesna teža</th></tr>";
@@ -371,16 +430,14 @@ function preberiMeritveVitalnihZnakov() {
 						    headers: {"Ehr-Session": sessionId},
 						    success: function (res) {
 						    	if (res.length > 0) {
-						  var results = "<table id='tabelaPodatkov' class='table table-striped " +
-	                    "'><tr><th>Datum in ura</th>" + 
-	                    "<th class='text-right'>Telesna višina</th></tr>";
+						    		podatki_graf.height = res;
+						    		$("#tabelaPodatkov tr:eq(0)").append("<th class='text-right'>Telesna višina</th>");
+						    		
+						    		var st = 1;
 							        for (var i in res) {
-							            results += "<tr><td>" + res[i].time + 
-	                          "</td><td class='text-right'>" + res[i].height + " " 	+
-	                          res[i].unit + "</td>";
+							    		$("#tabelaPodatkov tr:eq(" + st + ")").append("<td class='text-right'>" + res[i].height + " " 	+ res[i].unit + "</td>");
+							    		st++;
 							        }
-							        results += "</table>";
-							        $("#rezultatMeritveVitalnihZnakov").append(results);
 						    	} else {
 						    		$("#preberiMeritveVitalnihZnakovSporocilo").html(
 	                    "<span class='obvestilo label label-warning fade-in'>" +
@@ -398,10 +455,55 @@ function preberiMeritveVitalnihZnakov() {
 	    	error: function(err) {
 	    		$("#preberiMeritveVitalnihZnakovSporocilo").html(
             "<span class='obvestilo label label-danger fade-in'>Napaka '" +
-            JSON.parse(err.responseText).userMessage + "'!");
+            JSON.parse(err.responseText).userMessage + "'</span>");
 	    	}
 		});
 	}
 }
 
+function kreirajGraf() {
+	$('#graf').empty();
+	
+	if(!podatki_graf.weight) {
+		$("#grafSporocilo").html(
+            "<span class='obvestilo label label-danger fade-in'>Napaka: ni podatkov!</span>");
+        return;
+	}
+	
+	var data_g = {
+		time: ['x'],
+		weight: ['Teža']
+	};
+	
+	for (var i in podatki_graf.weight) {
+		var c = podatki_graf.weight[i].time;
+		//c = c.replace(/T/g," ");
+		c = c.split('T');
+		console.log (c);
+		data_g.time.push(c[0]);
+		data_g.weight.push(podatki_graf.weight[i].weight);
+	}
+	
+	console.log(data_g);
+var chart = c3.generate({
+		bindto: '#graf',
+    data: {
+        x: 'x',
+//        xFormat: '%Y%m%d', // 'xFormat' can be used as custom format of 'x'
+        columns: [
+            data_g.time,
+//            ['x', '20130101', '20130102', '20130103', '20130104', '20130105', '20130106'],
+            	data_g.weight
+        ]
+    },
+    axis: {
+        x: {
+            type: 'timeseries',
+            tick: {
+                format: '%Y-%m-%d'
+            }
+        }
+    }
+});
 
+}

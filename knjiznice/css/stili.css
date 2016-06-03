@@ -1,3 +1,5 @@
+body {padding-top: 70px;}
+
 .navbar {
     background-color: #0080ff;
 }
@@ -11,7 +13,7 @@
     text-decoration: underline;
 }
 
-#gumbEHR {
+#gumbEHR .gumbEHR {
     margin-top: 10px;
     padding: 5px;
 }
@@ -22,12 +24,30 @@
 }
 
 
-#okvircek {
+#okvircek, .okvircek {
     background-color: #bc4c45;
 }
 
 #okvircekPomoc {
     background-color: #f0ac7d;
+    margin-top: 10px;
+    padding: 5px;
+}
+
+#gumbDodajMeritve {
+    text-align: center;
+    margin-top: 10px;
+    padding: 5px;
+}
+
+#gumbEHR {
+    text-align: center;
+    margin-top: 10px;
+    padding: 5px;
+}
+
+#gumbDodajMeritve {
+    text-align: center;
     margin-top: 10px;
     padding: 5px;
 }
@@ -44,10 +64,34 @@
     color: #fff;
 }
 
+#gumbGraf {
+    color: #fff;
+    text-align: center;
+    margin-top: 10px;
+    padding: 5px;
+}
+
+
+#gumbGraf:hover {
+    text-decoration: underline;
+    color: #fff;
+}
+
+#gumbDodajUporabnika{
+    text-align: center;
+    margin-top: 10px;
+    padding: 5px;
+    float: right;
+}
+
 #tabelaPodatkov {
     background-color: #cccccc;
 }
 
 #tabelaPodatkov:hover {
     background-color: #bbbbbb;
+}
+
+#graf {
+    margin-left: -15px;
 }
