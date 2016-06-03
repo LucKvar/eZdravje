@@ -43,3 +43,11 @@
     text-decoration: underline;
     color: #fff;
 }
+
+#tabelaPodatkov {
+    background-color: #cccccc;
+}
+
+#tabelaPodatkov:hover {
+    background-color: #bbbbbb;
+}
