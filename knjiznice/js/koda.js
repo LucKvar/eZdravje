@@ -40,10 +40,22 @@ $(document).ready(function() {
   parseCookie();
   
   /**
-   * Napolni testni EHR ID pri prebiranju EHR zapisa obstoječega bolnika,
-   * ko uporabnik izbere vrednost iz padajočega menuja
-   * (npr. Dejan Lavbič, Pujsa Pepa, Ata Smrk)
+    * Napolni testni EHR ID pri pregledu meritev vitalnih znakov obstoječega
+   * bolnika, ko uporabnik izbere vrednost iz padajočega menuja
+   * (npr. Ata Smrk, Pujsa Pepa)
    */
+	$('#preberiEhrIdZaVitalneZnake').change(function() {
+		$("#preberiMeritveVitalnihZnakovSporocilo").html("");
+		$("#rezultatMeritveVitalnihZnakov").html("");
+		$("#meritveVitalnihZnakovEHRid").val($(this).val());
+	});
+
+	
+	$('#user').change(function() {
+		$("#preberiSporocilo").html("");
+		$("#dodajVitalnoEHR").val($(this).val());
+	});
+	
 	$('#user').change(function() {
 		$("#preberiSporocilo").html("");
 		$("#preberiEHRid").val($(this).val());
@@ -51,7 +63,7 @@ $(document).ready(function() {
 	
 	$('#user').change(function() {
 		$("#preberiSporocilo").html("");
-		$("#preberiUser").val($(this).val());
+		$("#meritveVitalnihZnakovEHRid").val($(this).val());
 	});
 	
 	$("#dodajPodatke").click(function(){
@@ -61,6 +73,32 @@ $(document).ready(function() {
   $("#dodajPodatke").click(function(){
         $("#pregledPodatkov").css("display", "block");
     });
+    
+  /**
+   * Napolni testne vrednosti (EHR ID, datum in ura, telesna višina,
+   * telesna teža, telesna temperatura, sistolični in diastolični krvni tlak,
+   * nasičenost krvi s kisikom in merilec) pri vnosu meritve vitalnih znakov
+   * bolnika, ko uporabnik izbere vrednosti iz padajočega menuja (npr. Ata Smrk)
+   */
+	$('#preberiObstojeciVitalniZnak').change(function() {
+		$("#dodajMeritveVitalnihZnakovSporocilo").html("");
+		var podatki = $(this).val().split("|");
+		$("#dodajVitalnoEHR").val(podatki[0]);
+		$("#dodajVitalnoDatumInUra").val(podatki[1]);
+		$("#dodajVitalnoTelesnaVisina").val(podatki[2]);
+		$("#dodajVitalnoTelesnaTeza").val(podatki[3]);
+	});
+	
+	/**
+   * Napolni testni EHR ID pri pregledu meritev vitalnih znakov obstoječega
+   * bolnika, ko uporabnik izbere vrednost iz padajočega menuja
+   * (npr. Ata Smrk, Pujsa Pepa)
+   */
+	$('#preberiEhrIdZaVitalneZnake').change(function() {
+		$("#preberiMeritveVitalnihZnakovSporocilo").html("");
+		$("#rezultatMeritveVitalnihZnakov").html("");
+		$("#meritveVitalnihZnakovEHRid").val($(this).val());
+	});
 
 
 });
@@ -136,6 +174,7 @@ function kreirajEHRzaBolnika() {
                     "label-danger fade-in'>Napaka '" +
                     JSON.parse(err.responseText).userMessage + "'!");
 		            }
+		            
 		        });
 		    }
 		});
@@ -228,12 +267,10 @@ function dodajToCookie() {
 function dodajMeritveVitalnihZnakov() {
 	sessionId = getSessionId();
 
-	var ehrId = $("#preberiUser").val();
+	var ehrId = $("#dodajVitalnoEHR").val();
 	var datumInUra = $("#dodajVitalnoDatumInUra").val();
 	var telesnaVisina = $("#dodajVitalnoTelesnaVisina").val();
 	var telesnaTeza = $("#dodajVitalnoTelesnaTeza").val();
-	var srcniUtrip = $("#dodajSrcniUtrip").val();
-
 
 	if (!ehrId || ehrId.trim().length == 0) {
 		$("#dodajMeritveVitalnihZnakovSporocilo").html("<span class='obvestilo " +
@@ -249,18 +286,12 @@ function dodajMeritveVitalnihZnakov() {
 		    "ctx/territory": "SI",
 		    "ctx/time": datumInUra,
 		    "vital_signs/height_length/any_event/body_height_length": telesnaVisina,
-		    "vital_signs/body_weight/any_event/body_weight": telesnaTeza,
-		   /*	"vital_signs/body_temperature/any_event/temperature|magnitude": telesnaTemperatura,
-		    "vital_signs/body_temperature/any_event/temperature|unit": "°C",
-		    "vital_signs/blood_pressure/any_event/systolic": sistolicniKrvniTlak,
-		    "vital_signs/blood_pressure/any_event/diastolic": diastolicniKrvniTlak,
-		    "vital_signs/indirect_oximetry:0/spo2|numerator": nasicenostKrviSKisikom */
+		    "vital_signs/body_weight/any_event/body_weight": telesnaTeza
 		};
 		var parametriZahteve = {
 		    ehrId: ehrId,
 		    templateId: 'Vital Signs',
-		    format: 'FLAT',
-		    committer: merilec
+		    format: 'FLAT'
 		};
 		$.ajax({
 		    url: baseUrl + "/composition?" + $.param(parametriZahteve),
@@ -280,3 +311,68 @@ function dodajMeritveVitalnihZnakov() {
 		});
 	}
 }
+
+
+/**
+ * Pridobivanje vseh zgodovinskih podatkov meritev izbranih vitalnih znakov
+ * (telesna temperatura, filtriranje telesne temperature in telesna teža).
+ * Filtriranje telesne temperature je izvedena z AQL poizvedbo, ki se uporablja
+ * za napredno iskanje po zdravstvenih podatkih.
+ */
+function preberiMeritveVitalnihZnakov() {
+	sessionId = getSessionId();
+
+	var ehrId = $("#meritveVitalnihZnakovEHRid").val();
+
+	if (!ehrId || ehrId.trim().length == 0) {
+		$("#preberiMeritveVitalnihZnakovSporocilo").html("<span class='obvestilo " +
+      "label label-warning fade-in'>Prosim vnesite zahtevan podatek!");
+	} else {
+		$.ajax({
+			url: baseUrl + "/demographics/ehr/" + ehrId + "/party",
+	    	type: 'GET',
+	    	headers: {"Ehr-Session": sessionId},
+	    	success: function (data) {
+				var party = data.party;
+				$("#rezultatMeritveVitalnihZnakov").html("<br/><span>Pridobivanje " +
+          "podatkov za <b>'" + "Telesno težo" + "'</b> uporabnika <b>'" + party.firstNames +
+          " " + party.lastNames + "'</b>.</span><br/><br/>");
+					$.ajax({
+					    url: baseUrl + "/view/" + ehrId + "/" + "weight",
+					    type: 'GET',
+					    headers: {"Ehr-Session": sessionId},
+					    success: function (res) {
+					    	if (res.length > 0) {
+						    	var results = "<table class='table table-striped " +
+                    "table-hover'><tr><th>Datum in ura</th>" +
+                    "<th class='text-right'>Telesna teža</th></tr>";
+						        for (var i in res) {
+						            results += "<tr><td>" + res[i].time +
+                          "</td><td class='text-right'>" + res[i].weight + " " 	+
+                          res[i].unit + "</td>";
+						        }
+						        results += "</table>";
+						        $("#rezultatMeritveVitalnihZnakov").append(results);
+					    	} else {
+					    		$("#preberiMeritveVitalnihZnakovSporocilo").html(
+                    "<span class='obvestilo label label-warning fade-in'>" +
+                    "Ni podatkov!</span>");
+					    	}
+					    },
+					    error: function() {
+					    	$("#preberiMeritveVitalnihZnakovSporocilo").html(
+                  "<span class='obvestilo label label-danger fade-in'>Napaka '" +
+                  JSON.parse(err.responseText).userMessage + "'!");
+					    }
+					});
+	    	},
+	    	error: function(err) {
+	    		$("#preberiMeritveVitalnihZnakovSporocilo").html(
+            "<span class='obvestilo label label-danger fade-in'>Napaka '" +
+            JSON.parse(err.responseText).userMessage + "'!");
+	    	}
+		});
+	}
+}
+
+

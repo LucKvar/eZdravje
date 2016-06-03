@@ -70,13 +70,13 @@
 					<div class="panel-body">
 						<span class="label label-default">Shranjeni uporabniki</span><select class="form-control" id="user"><option value=""></option></select>
 						<span class="label label-default">EHR ID</span><input id="preberiEHRid" type="text" class="form-control input-mini" placeholder="">
-						<button id="dodajPodatke" type="button" class="btn btn-primary btn-xs" onclick="preberiEHRodBolnika()">Preberi podatke o uporabniku</button><span id="preberiSporocilo"></span>
+						<button id="dodajPodatke" type="button" class="btn btn-primary btn-xs" onclick="preberiMeritveVitalnihZnakov()">Preberi podatke o uporabniku</button><span id="preberiSporocilo"></span>
 				  </div>
 				</div>
 			</div>
 		</div>
 			<div class="row">
-			<div id="vnosPodatkov" class="col-lg-6 col-md-6 col-sm-6">
+			<div id="vnosPodatkov" class="col-lg-6 col-md-6 col-sm-6" style="display: none;">
 				<div id="okvircek" class="panel panel-default">
 					<div id="okvircek" class="panel-heading">
 						<div class="row">
@@ -84,25 +84,24 @@
 						</div>
 					</div>
 					<div class="panel-body">
-						<span class="label label-default">EHR ID</span><input id="preberiUser" type="text" class="form-control input-mini" placeholder="">
+						<span class="label label-default">EHR ID</span><input id="dodajVitalnoEHR" type="text" class="form-control input-mini" placeholder="7b661e12-3a98-21ad-c29e-2dc9f5a3d885">
 						<span class="label label-default">Datum in ura</span><input id="dodajVitalnoDatumInUra" type="text" class="form-control input-mini" placeholder="2014-11-21T11:40Z">
 						<span class="label label-default">Telesna višina</span><div class="input-group"><input id="dodajVitalnoTelesnaVisina" type="text" class="form-control input-mini" placeholder="185"><span class="input-group-addon">cm</span></div>
 						<span class="label label-default">Telesna teža</span><div class="input-group"><input id="dodajVitalnoTelesnaTeza" type="text" class="form-control input-mini" placeholder="80.00"><span class="input-group-addon">kg</span></div>
-						<span class="label label-default">Srčni utrip</span><div class="input-group"><input id="dodajSrcniUtrip" type="text" class="form-control input-mini" placeholder="62.00"><span class="input-group-addon">utrip/minuto</span></div>
 						<button id="gumbEHR" type="button" class="btn btn-primary btn-xs" onclick="dodajMeritveVitalnihZnakov()">Dodaj meritve vitalnih znakov</button><span id="dodajMeritveVitalnihZnakovSporocilo"></span>
 				  	</div>
 				</div>
 			</div>
-			<div id="pregledPodatkov" class="col-lg-6 col-md-6 col-sm-6">
+			<div id="pregledPodatkov" class="col-lg-6 col-md-6 col-sm-6" style="display: none;">
 				<div id="okvircek" class="panel panel-default">
 					<div id="okvircek" class="panel-heading">
 						<div class="row">
-							<div class="col-lg-6 col-md-6 col-sm-6"><b>Pregled</b> meritev uporabnika</div>
+							<div class="col-lg-12 col-md-12 col-sm-12"><b>Pregled</b> meritev <b>telesne teže</b> uporabnika</div>
 						</div>
 					</div>
 					<div class="panel-body">
 						<span class="label label-default">EHR ID</span><input id="meritveVitalnihZnakovEHRid" type="text" class="form-control input-mini" placeholder="7b661e12-3a98-21ad-c29e-2dc9f5a3d885">
-						<button type="button" id="dodajPodatke" class="btn btn-primary btn-xs" onclick="preberiMeritveVitalnihZnakov()">Preberi meritve vitalnih znakov</button><span id="preberiMeritveVitalnihZnakovSporocilo"></span>
+						<div id="gumbOsvezi" onclick="preberiMeritveVitalnihZnakov()"><li>Osveži</li></div>
 						<div id="rezultatMeritveVitalnihZnakov"></div>
 				  	</div>
 				</div>

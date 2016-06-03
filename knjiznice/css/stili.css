@@ -31,3 +31,12 @@
     margin-top: 10px;
     padding: 5px;
 }
+
+#gumbOsvezi {
+    text-align: left;
+}
+
+#gumbOsvezi:hover {
+    text-decoration: underline;
+    color: #fff;
+}
