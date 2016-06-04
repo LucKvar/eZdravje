@@ -114,6 +114,13 @@ body {
     float: right;
 }
 
+#gumbPreklici {
+    text-align: center;
+    margin-top: 10px;
+    padding: 5px;
+    float: right;
+}
+
 #tabelaPodatkov {
     background-color: #cccccc;
 }

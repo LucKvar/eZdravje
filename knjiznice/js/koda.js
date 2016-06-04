@@ -107,6 +107,10 @@ $(document).ready(function() {
         $("#dodaj").css("display", "none");
     });
     
+    $("#gumbPreklici").click(function(){
+        $("#dodaj").css("display", "none");
+    });
+    
     $("#gumbDodajUporabnika").click(function(){
         $("#vnosPodatkov").css("display", "none");
     });
