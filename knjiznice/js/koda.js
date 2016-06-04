@@ -107,6 +107,18 @@ $(document).ready(function() {
         $("#dodaj").css("display", "none");
     });
     
+    $("#gumbDodajUporabnika").click(function(){
+        $("#vnosPodatkov").css("display", "none");
+    });
+    
+    $("#gumbDodajUporabnika").click(function(){
+        $("#pregledPodatkov").css("display", "none");
+    });
+    
+    $("#gumbDodajUporabnika").click(function(){
+        $("#graf_okvir").css("display", "none");
+    });
+    
     
   /**
    * Napolni testne vrednosti (EHR ID, datum in ura, telesna višina,
@@ -230,6 +242,10 @@ function kreirajEHRzaBolnika() {
  * @param stPacienta zaporedna številka pacienta (1, 2 ali 3)
  * @return ehrId generiranega pacienta
  */
+ 
+/*
+ * Ta funkcije je implementirana drugje, natančneje.. funkcija parseCookie
+ */
 function generirajPodatke(stPacienta) {
   ehrId = "";
 
@@ -278,6 +294,9 @@ function parseCookie() {
     
     */
     $("#user").append('<option value="">Izberi uporabnika...</option>');
+    $("#user").append('<option value="657482ea-c19f-40b4-9013-4bbcdac3f959">Janez Kranjski</option>');
+    $("#user").append('<option value="bd66d802-017f-4e09-abb1-2e14c1f8bae8">Micka Okrogla</option>');
+    $("#user").append('<option value="b490b00d-0d0c-4baf-a654-ebdfa88e45d4">Tim Gorenc</option>');
     
     var current = getCookie("EhrPodatek");
     if(current) {

@@ -43,7 +43,9 @@
 
   <!-- ZAČETEK: Vsebina aplikacije -->
   <div class="container">
-    <div class="page-header"><h2>Vnos uporabnika</h2></div>
+    <div class="page-header"><h2>Vnos uporabnika</h2>
+    <div id="motivacijski">Ste se odločili izgubiti nekaj kilogramov? S Fitness Tracker vam to lahko uspe! Prijavi se še danes in spremljaj svoj napredek. TI ZMOREŠ!</div>
+    </div>
 		<div class="row">
 			<div id="prijava" class="col-lg-6 col-md-6 col-sm-6">
 				<div id="okvircek" class="panel panel-default">
@@ -65,7 +67,6 @@
 					<div class="panel-heading okvircek">
 						<div class="row center-block">
 							<div class="col-lg-8 col-md-8 col-sm-8"><b>Kreiraj EHR zapis</b> za novega uporabnika</div>
-							<div class="col-lg-4 col-md-4 col-sm-4"><select class="form-control input-sm" id="preberiPredlogoBolnika"><option value=""></option><option value="Pujsa,Pepa,1938-10-30T14:58,Ženski">Pujsa Pepa</option></select></div>
 						</div>
 					</div>
 					<div class="panel-body">
@@ -88,10 +89,10 @@
 					</div>
 					<div class="panel-body">
 						<span class="label label-default">EHR ID</span><input id="dodajVitalnoEHR" type="text" class="form-control input-mini" placeholder="7b661e12-3a98-21ad-c29e-2dc9f5a3d885">
-						<span class="label label-default">Datum in ura</span><input id="dodajVitalnoDatumInUra" type="text" class="form-control input-mini" placeholder="2014-11-21T11:40Z">
+						<span class="label label-default">Datum in ura meritve</span><input id="dodajVitalnoDatumInUra" type="text" class="form-control input-mini" placeholder="2014-11-21T11:40Z">
 						<span class="label label-default">Telesna višina</span><div class="input-group"><input id="dodajVitalnoTelesnaVisina" type="text" class="form-control input-mini" placeholder="185"><span class="input-group-addon">cm</span></div>
 						<span class="label label-default">Telesna teža</span><div class="input-group"><input id="dodajVitalnoTelesnaTeza" type="text" class="form-control input-mini" placeholder="80.00"><span class="input-group-addon">kg</span></div>
-						<button id="gumbDodajMeritve" type="button" class="btn btn-primary btn-xs gumbEHR" onclick="dodajMeritveVitalnihZnakov()">Dodaj meritve vitalnih znakov</button><span id="dodajMeritveVitalnihZnakovSporocilo"></span>
+						<button id="gumbDodajMeritve" type="button" class="btn btn-primary btn-xs gumbEHR" onclick="dodajMeritveVitalnihZnakov()">Dodaj meritve</button><span id="dodajMeritveVitalnihZnakovSporocilo"></span>
 				  	</div>
 				</div>
 			</div>
