@@ -1,7 +1,11 @@
-body {padding-top: 70px;}
+body {
+    padding-top: 70px;
+    background-color: #e3e3e3;
+
+}
 
 .navbar {
-    background-color: #0080ff;
+    background-color: #7d4627;
 }
 .navbar a {
     color: #fff;
@@ -9,18 +13,40 @@ body {padding-top: 70px;}
 
 .navbar a:hover {
     background-color: transparent !important;
-    color: #00284d;
+    color: #e3e0cf;
+}
+
+.glavaOkvirja {
+    background-color: #c9d8c5 !important;
+}
+
+.teloOkvirja {
+    background-color: #9ad3de !important;
+}
+
+.gumbi {
+    background-color: #b56969 !important;
+    margin-top: 10px;
+    padding: 5px;
+    
+}
+
+.gumbi:hover {
+    background-color: #9d4e4e !important;
     text-decoration: underline;
+    margin-top: 10px;
+    padding: 5px;
+    
+}
+
+.glavaTekst{
+    color: #312c32;
 }
 
 #motivacijski {
     text-align: center;
 }
 
-#gumbEHR .gumbEHR {
-    margin-top: 10px;
-    padding: 5px;
-}
 
 #dodajPodatke {
     margin-top: 10px;
@@ -32,11 +58,11 @@ body {padding-top: 70px;}
     background-color: #bc4c45;
 }
 
-#okvircekPomoc {
+/*#okvircekPomoc {
     background-color: #f0ac7d;
     margin-top: 10px;
     padding: 5px;
-}
+}*/
 
 #gumbDodajMeritve {
     text-align: center;
@@ -96,6 +122,10 @@ body {padding-top: 70px;}
     background-color: #bbbbbb;
 }
 
-#graf {
-    margin-left: -15px;
+.c3 {
+    position: initial !important;
+}
+
+.twitterOkvircek {
+    border-style: none !important;
 }

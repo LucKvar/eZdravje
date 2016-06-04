@@ -119,6 +119,10 @@ $(document).ready(function() {
         $("#graf_okvir").css("display", "none");
     });
     
+    $("#dodajPodatke").click(function(){
+        $("#graf_okvir").css("display", "none");
+    });
+    
     
   /**
    * Napolni testne vrednosti (EHR ID, datum in ura, telesna višina,
@@ -243,13 +247,15 @@ function kreirajEHRzaBolnika() {
  * @return ehrId generiranega pacienta
  */
  
-/*
- * Ta funkcije je implementirana drugje, natančneje.. funkcija parseCookie
- */
+
 function generirajPodatke(stPacienta) {
   ehrId = "";
 
-  // TODO: Potrebno implementirati
+if(stPacienta == 1) {
+    $("#user").append('<option value="657482ea-c19f-40b4-9013-4bbcdac3f959">Janez Kranjski</option>');
+    $("#user").append('<option value="bd66d802-017f-4e09-abb1-2e14c1f8bae8">Micka Okrogla</option>');
+    $("#user").append('<option value="b490b00d-0d0c-4baf-a654-ebdfa88e45d4">Tim Gorenc</option>');
+}
 
   return ehrId;
 }
@@ -287,16 +293,10 @@ function getCookie(name) {
 
 function parseCookie() {
     $("#user").empty();
-    /*
-    //TODO
-    var output = '<option value="'+ ehr + '">' +ime in priimek + ' ' + data[1] + '</option>';
-    $("#user").append(output);
     
-    */
     $("#user").append('<option value="">Izberi uporabnika...</option>');
-    $("#user").append('<option value="657482ea-c19f-40b4-9013-4bbcdac3f959">Janez Kranjski</option>');
-    $("#user").append('<option value="bd66d802-017f-4e09-abb1-2e14c1f8bae8">Micka Okrogla</option>');
-    $("#user").append('<option value="b490b00d-0d0c-4baf-a654-ebdfa88e45d4">Tim Gorenc</option>');
+	
+	generirajPodatke(1);
     
     var current = getCookie("EhrPodatek");
     if(current) {
@@ -505,7 +505,7 @@ function kreirajGraf() {
 	
 	console.log(data_g);
 var chart = c3.generate({
-		bindto: '#graf',
+		bindto: d3.select('#graf'),
     data: {
         x: 'x',
 //        xFormat: '%Y%m%d', // 'xFormat' can be used as custom format of 'x'
@@ -522,7 +522,11 @@ var chart = c3.generate({
                 format: '%Y-%m-%d'
             }
         }
-    }
+    },
+    
+    size: {
+		width: 1100
+	}
 });
 
 }

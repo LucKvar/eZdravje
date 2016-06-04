@@ -48,25 +48,25 @@
     </div>
 		<div class="row">
 			<div id="prijava" class="col-lg-6 col-md-6 col-sm-6">
-				<div id="okvircek" class="panel panel-default">
-					<div id="okvircek" class="panel-heading">
+				<div id="okvircek" class="panel panel-default teloOkvirja">
+					<div id="okvircek" class="panel-heading glavaOkvirja">
 						<div class="row center-block">
-							<div class="col-lg-8 col-md-8 col-sm-8"><b>Shranjeni</b> uporabniki</div>
+							<div class="col-lg-8 col-md-8 col-sm-8 glavaTekst"><b>Shranjeni</b> uporabniki</div>
 						</div>
 					</div>
 					<div class="panel-body">
 						<span class="label label-default">Shranjeni uporabniki</span><select class="form-control" id="user"><option value=""></option></select>
 						<span class="label label-default">EHR ID</span><input id="preberiEHRid" type="text" class="form-control input-mini" placeholder="">
-						<button id="dodajPodatke" type="button" class="btn btn-primary btn-xs" onclick="preberiMeritveVitalnihZnakov()">Preberi podatke o uporabniku</button><span id="preberiSporocilo"></span>
-						<button id="gumbDodajUporabnika" type="button" class="btn btn-primary btn-xs">Dodaj uporabnika</button>
+						<button id="dodajPodatke" type="button" class="btn btn-primary btn-xs gumbi" onclick="preberiMeritveVitalnihZnakov()">Preberi podatke o uporabniku</button><span id="preberiSporocilo"></span>
+						<button id="gumbDodajUporabnika" type="button" class="btn btn-primary btn-xs gumbi">Dodaj uporabnika</button>
 				  </div>
 				</div>
 			</div>
 			<div id="dodaj" class="col-lg-6 col-md-6 col-sm-6" style="display: none;">
-				<div class="panel panel-default okvircek">
-					<div class="panel-heading okvircek">
+				<div class="panel panel-default teloOkvirja">
+					<div class="panel-heading glavaOkvirja">
 						<div class="row center-block">
-							<div class="col-lg-8 col-md-8 col-sm-8"><b>Kreiraj EHR zapis</b> za novega uporabnika</div>
+							<div class="col-lg-8 col-md-8 col-sm-8 glavaTekst"><b>Kreiraj EHR zapis</b> za novega uporabnika</div>
 						</div>
 					</div>
 					<div class="panel-body">
@@ -74,17 +74,17 @@
 						<span class="label label-default">Priimek</span><input id="kreirajPriimek" type="text" class="form-control" placeholder="Kranjski">
 						<span class="label label-default">Spol</span><select class="form-control" id="kreirajSpol"><option value="Moški/Ženski"></option><option value="Moški">Moški</option><option value="Ženski">Ženski</option><option value="Drugo">Drugo</option></select>
 						<span class="label label-default">Datum rojstva</span><input id="kreirajDatumRojstva" type="text" class="form-control" placeholder="1957-03-10T09:08">
-						<button id="gumbEHR" type="button" class="btn btn-primary btn-xs gumbEHR" onclick="kreirajEHRzaBolnika()">Dodaj osnovne podatke o uporabniku</button><span id="kreirajSporocilo"></span>
+						<button id="gumbEHR" type="button" class="btn btn-primary btn-xs gumbi" onclick="kreirajEHRzaBolnika()">Dodaj osnovne podatke o uporabniku</button><span id="kreirajSporocilo"></span>
 				  	</div>
 				</div>
 			</div>
 		</div>
 			<div class="row">
 			<div id="vnosPodatkov" class="col-lg-6 col-md-6 col-sm-6" style="display: none;">
-				<div id="okvircek" class="panel panel-default">
-					<div id="okvircek" class="panel-heading">
+				<div id="okvircek" class="panel panel-default teloOkvirja">
+					<div id="okvircek" class="panel-heading glavaOkvirja">
 						<div class="row">
-							<div class="col-lg-8 col-md-8 col-sm-8"><b>Vnos</b> meritev uporabnika</div>
+							<div class="col-lg-8 col-md-8 col-sm-8 glavaTekst"><b>Vnos</b> meritev uporabnika</div>
 						</div>
 					</div>
 					<div class="panel-body">
@@ -92,33 +92,33 @@
 						<span class="label label-default">Datum in ura meritve</span><input id="dodajVitalnoDatumInUra" type="text" class="form-control input-mini" placeholder="2014-11-21T11:40Z">
 						<span class="label label-default">Telesna višina</span><div class="input-group"><input id="dodajVitalnoTelesnaVisina" type="text" class="form-control input-mini" placeholder="185"><span class="input-group-addon">cm</span></div>
 						<span class="label label-default">Telesna teža</span><div class="input-group"><input id="dodajVitalnoTelesnaTeza" type="text" class="form-control input-mini" placeholder="80.00"><span class="input-group-addon">kg</span></div>
-						<button id="gumbDodajMeritve" type="button" class="btn btn-primary btn-xs gumbEHR" onclick="dodajMeritveVitalnihZnakov()">Dodaj meritve</button><span id="dodajMeritveVitalnihZnakovSporocilo"></span>
+						<button id="gumbDodajMeritve" type="button" class="btn btn-primary btn-xs gumbi" onclick="dodajMeritveVitalnihZnakov()">Dodaj meritve</button><span id="dodajMeritveVitalnihZnakovSporocilo"></span>
 				  	</div>
 				</div>
 			</div>
 			<div id="pregledPodatkov" class="col-lg-6 col-md-6 col-sm-6" style="display: none;">
-				<div id="okvircek" class="panel panel-default">
-					<div id="okvircek" class="panel-heading">
+				<div id="okvircek" class="panel panel-default teloOkvirja">
+					<div id="okvircek" class="panel-heading glavaOkvirja">
 						<div class="row">
-							<div class="col-lg-12 col-md-12 col-sm-12"><b>Pregled</b> meritev <b>telesne teže</b> uporabnika</div>
+							<div class="col-lg-12 col-md-12 col-sm-12 glavaTekst"><b>Pregled</b> meritev <b>telesne teže</b> uporabnika</div>
 						</div>
 					</div>
 					<div class="panel-body">
 						<span class="label label-default">EHR ID</span><input id="meritveVitalnihZnakovEHRid" type="text" class="form-control input-mini" placeholder="7b661e12-3a98-21ad-c29e-2dc9f5a3d885">
-						<div id="gumbOsvezi" type="button" class="btn btn-primary btn-xs" onclick="preberiMeritveVitalnihZnakov()">Osveži</div>
+						<div id="gumbOsvezi" type="button" class="btn btn-primary btn-xs gumbi" onclick="preberiMeritveVitalnihZnakov()">Osveži</div>
 						<span id="preberiMeritveVitalnihZnakovSporocilo"></span>
 						<div id="rezultatMeritveVitalnihZnakov"></div>
-						<div type="button" class="btn btn-primary btn-xs"><a id="gumbGraf" onclick="kreirajGraf()">Graf</a></div>
+						<div type="button" class="btn btn-primary btn-xs gumbi"><a id="gumbGraf" onclick="kreirajGraf()">Graf</a></div>
 						<span id="grafSporocilo"></span>
 						
 				  	</div>
 				</div>
 			</div>
 			<div id="graf_okvir" class="col-lg-12 col-md-12 col-sm-12" style="display: none;">
-				<div class="panel panel-default okvircek">
-					<div class="panel-heading okvircek">
+				<div class="panel panel-default teloOkvirja">
+					<div class="panel-heading glavaOkvirja">
 						<div class="row">
-							<div class="col-lg-12 col-md-12 col-sm-12"><strong>Graf</strong></div>
+							<div class="col-lg-12 col-md-12 col-sm-12 glavaTekst"><strong>Graf</strong></div>
 						</div>
 					</div>
 					<div class="panel-body">
