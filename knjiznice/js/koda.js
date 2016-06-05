@@ -9,7 +9,6 @@ var password = "ois4fri";
 /**
  * Prijava v sistem z privzetim uporabnikom za predmet OIS in pridobitev
  * enolične ID številke za dostop do funkcionalnosti
- * @return enolični identifikator seje za dostop do funkcionalnosti
  */
 function getSessionId() {
     var response = $.ajax({
@@ -25,9 +24,9 @@ $(document).ready(function() {
     
   /**
    * Napolni testne vrednosti (ime, priimek in datum rojstva) pri kreiranju
-   * EHR zapisa za novega bolnika, ko uporabnik izbere vrednost iz
-   * padajočega menuja (npr. Pujsa Pepa).
+   * EHR zapisa za novega uporabnika
    */
+   
   $('#preberiPredlogoBolnika').change(function() {
     $("#kreirajSporocilo").html("");
     var podatki = $(this).val().split(",");
@@ -41,9 +40,8 @@ $(document).ready(function() {
   
   /**
     * Napolni testni EHR ID pri pregledu meritev vitalnih znakov obstoječega
-   * bolnika, ko uporabnik izbere vrednost iz padajočega menuja
-   * (npr. Ata Smrk, Pujsa Pepa)
-   */
+	* uporabnika
+	*/
 	$('#preberiEhrIdZaVitalneZnake').change(function() {
 		$("#preberiMeritveVitalnihZnakovSporocilo").html("");
 		$("#rezultatMeritveVitalnihZnakov").html("");
@@ -130,9 +128,7 @@ $(document).ready(function() {
     
   /**
    * Napolni testne vrednosti (EHR ID, datum in ura, telesna višina,
-   * telesna teža, telesna temperatura, sistolični in diastolični krvni tlak,
-   * nasičenost krvi s kisikom in merilec) pri vnosu meritve vitalnih znakov
-   * bolnika, ko uporabnik izbere vrednosti iz padajočega menuja (npr. Ata Smrk)
+   * telesna teža
    */
 	$('#preberiObstojeciVitalniZnak').change(function() {
 		$("#dodajMeritveVitalnihZnakovSporocilo").html("");
@@ -145,8 +141,7 @@ $(document).ready(function() {
 	
 	/**
    * Napolni testni EHR ID pri pregledu meritev vitalnih znakov obstoječega
-   * bolnika, ko uporabnik izbere vrednost iz padajočega menuja
-   * (npr. Ata Smrk, Pujsa Pepa)
+   * uporabnika
    */
 	$('#preberiEhrIdZaVitalneZnake').change(function() {
 		$("#preberiMeritveVitalnihZnakovSporocilo").html("");
@@ -158,7 +153,7 @@ $(document).ready(function() {
 });
 
 /**
- * Kreiraj nov EHR zapis za pacienta in dodaj osnovne demografske podatke.
+ * Kreiraj nov EHR zapis za uporabnika in dodaj osnovne demografske podatke.
  * V primeru uspešne akcije izpiši sporočilo s pridobljenim EHR ID, sicer
  * izpiši napako.
  */
@@ -243,12 +238,7 @@ function kreirajEHRzaUporabnika() {
 }
 
 /**
- * Generator podatkov za novega pacienta, ki bo uporabljal aplikacijo. Pri
- * generiranju podatkov je potrebno najprej kreirati novega pacienta z
- * določenimi osebnimi podatki (ime, priimek in datum rojstva) ter za njega
- * shraniti nekaj podatkov o vitalnih znakih.
- * @param stPacienta zaporedna številka pacienta (1, 2 ali 3)
- * @return ehrId generiranega pacienta
+ * Generator podatkov za novega pacienta, ki bo uporabljal aplikacijo. 
  */
  
 
@@ -332,7 +322,7 @@ function dodajToCookie() {
 
 
 /**
- * Za podan EHR ID preberi demografske podrobnosti pacienta in izpiši sporočilo
+ * Za podan EHR ID preberi demografske podrobnosti uporabnika in izpiši sporočilo
  * s pridobljenimi podatki (ime, priimek in datum rojstva).
  */
 function preberiEHRodUporabnika() {
@@ -364,10 +354,9 @@ function preberiEHRodUporabnika() {
 	}
 }
 /**
- * Za dodajanje vitalnih znakov pacienta je pripravljena kompozicija, ki
+ * Za dodajanje vitalnih znakov uporabnika je pripravljena kompozicija, ki
  * vključuje množico meritev vitalnih znakov (EHR ID, datum in ura,
- * telesna višina, telesna teža, sistolični in diastolični krvni tlak,
- * nasičenost krvi s kisikom in merilec).
+ * telesna višina, telesna teža)
  */
 function dodajMeritveVitalnihZnakov() {
 	sessionId = getSessionId();
@@ -423,10 +412,7 @@ var podatki_graf = {
 };
 
 /**
- * Pridobivanje vseh zgodovinskih podatkov meritev izbranih vitalnih znakov
- * (telesna temperatura, filtriranje telesne temperature in telesna teža).
- * Filtriranje telesne temperature je izvedena z AQL poizvedbo, ki se uporablja
- * za napredno iskanje po zdravstvenih podatkih.
+ * Pridobivanje vseh zgodovinskih podatkov meritev izbranih vitalnih znakov.
  */
 function preberiMeritveVitalnihZnakov() {
 	$("#preberiMeritveVitalnihZnakovSporocilo").empty();
