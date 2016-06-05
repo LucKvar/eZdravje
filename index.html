@@ -35,6 +35,7 @@
           <li><a href="pomoc.html">Pomoč uporabnikom</a></li>
           <li><a href="opis.html">Opis ideje</a></li>
           <li><a href="nacrt.html">Načrt informacijske rešitve</a></li>
+          <li><a href="index.html">Generiraj podatke</a></li>
         </ul>
       </div>
     </div>
@@ -57,7 +58,7 @@
 					<div class="panel-body">
 						<span class="label label-default">Shranjeni uporabniki</span><select class="form-control" id="user"><option value=""></option></select>
 						<span class="label label-default">EHR ID</span><input id="preberiEHRid" type="text" class="form-control input-mini" placeholder="">
-						<button id="dodajPodatke" type="button" class="btn btn-primary btn-xs gumbi" onclick="preberiMeritveVitalnihZnakov()">Preberi podatke o uporabniku</button><span id="preberiSporocilo"></span>
+						<button id="dodajPodatke" type="button" class="btn btn-primary btn-xs gumbi" onclick="preberiMeritveVitalnihZnakov(); preberiEHRodUporabnika()">Preberi podatke o uporabniku</button><span id="preberiSporocilo"></span>
 						<button id="gumbDodajUporabnika" type="button" class="btn btn-primary btn-xs gumbi">Dodaj uporabnika</button>
 				  </div>
 				</div>
@@ -74,7 +75,7 @@
 						<span class="label label-default">Priimek</span><input id="kreirajPriimek" type="text" class="form-control" placeholder="Kranjski">
 						<span class="label label-default">Spol</span><select class="form-control" id="kreirajSpol"><option value="Moški/Ženski"></option><option value="Moški">Moški</option><option value="Ženski">Ženski</option><option value="Drugo">Drugo</option></select>
 						<span class="label label-default">Datum rojstva</span><input id="kreirajDatumRojstva" type="text" class="form-control" placeholder="1957-03-10T09:08">
-						<button id="gumbEHR" type="button" class="btn btn-primary btn-xs gumbi" onclick="kreirajEHRzaBolnika()">Dodaj osnovne podatke o uporabniku</button><span id="kreirajSporocilo"></span>
+						<button id="gumbEHR" type="button" class="btn btn-primary btn-xs gumbi" onclick="kreirajEHRzaUporabnika()">Dodaj osnovne podatke o uporabniku</button><span id="kreirajSporocilo"></span>
 						<button id="gumbPreklici" type="button" class="btn btn-primary btn-xs gumbi">Prekliči</button>
 
 				  	</div>
@@ -108,6 +109,7 @@
 					<div class="panel-body">
 						<span class="label label-default">EHR ID</span><input id="meritveVitalnihZnakovEHRid" type="text" class="form-control input-mini" placeholder="7b661e12-3a98-21ad-c29e-2dc9f5a3d885">
 						<div id="gumbOsvezi" type="button" class="btn btn-primary btn-xs gumbi" onclick="preberiMeritveVitalnihZnakov()">Osveži</div>
+						<div id="gumbPomocUporabnikom" type="button" class="btn btn-primary btn-xs gumbi" onclick="window.open('pomoc.html')">Pomoč uporabnikom</div>
 						<span id="preberiMeritveVitalnihZnakovSporocilo"></span>
 						<div id="rezultatMeritveVitalnihZnakov"></div>
 						<div type="button" class="btn btn-primary btn-xs gumbi"><a id="gumbGraf" onclick="kreirajGraf()">Graf</a></div>

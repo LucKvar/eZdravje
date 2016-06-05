@@ -50,6 +50,10 @@
             <!-- ZAČETEK: Opis ideje, ki jo aplikacija podpira -->
             <p>Osnovna ideja je bila, narediti aplikacijo, ki bo pomagala ljudem, ki želijo shujšati in spremljati njihov napredek. Tako bi lahko bili na tekočem, koliko so izgubili kilogramov po mesecih. 
                         Pravtako pa sem dodal še nekaj uporabnih strani, ki bi jim pomagale na njihovi poti.</p>
+            <p>Uporabnik, ki pride na stran in je že prijavljen, lahko izbere med dodanimi uporabniki (ki so shranjeni v piškotku). Če pa je uporabnik prvič na strani ima gumb Dodaj Uporabnika, kamor vpiše podatke (ime, priimek, spol in datum rojstva).
+            Nato z gumbom Dodaj osnovne podatke o uporabniku, doda svoje podatke v bazo in prejme ehrID, s katerim nato vpisuje podatke. Če uporabnik klikne na gumb Preberi podatke o upoabniku, se mu pokažeta dva okna.
+            Prvi je za vnos meritev, kamor vpiše meritve (Daum in ura meritve, telesna višina, telesna teža). Po kliku dodaj meritve se njegovi podatki shranijo. S klikom Osveži v oknu Pregled meritev telesne teže uporabnika, se podatki
+            osvežijo in prikažejo. Če si želi uporabnik ogledati graf spreminjanja njegove telesne teže, to stori s klikom na gumb Graf. Ta mu pokaže graf spreminjanja njegove teže po času vnosa meritev.</p>
             <!-- KONEC: Opis ideje, ki jo aplikacija podpira -->
           </div>
         </div>
@@ -71,10 +75,8 @@
           </div>
           <div class="panel-body">
             <!-- ZAČETEK: Master/detail načrtovalski vzorec -->
-            <p>Uporabnik, ki pride na stran in je že prijavljen, lahko izbere med dodanimi uporabniki (ki so shranjeni v piškotku). Če pa je uporabnik prvič na strani ima gumb Dodaj Uporabnika, kamor vpiše podatke (ime, priimek, spol in datum rojstva).
-            Nato z gumbom Dodaj osnovne podatke o uporabniku, doda svoje podatke v bazo in prejme ehrID, s katerim nato vpisuje podatke. Če uporabnik klikne na gumb Preberi podatke o upoabniku, se mu pokažeta dva okna.
-            Prvi je za vnos meritev, kamor vpiše meritve (Daum in ura meritve, telesna višina, telesna teža). Po kliku dodaj meritve se njegovi podatki shranijo. S klikom Osveži v oknu Pregled meritev telesne teže uporabnika, se podatki
-            osvežijo in prikažejo. Če si želi uporabnik ogledati graf spreminjanja njegove telesne teže, to stori s klikom na gumb Graf. Ta mu pokaže graf spreminjanja njegove teže po času vnosa meritev.</p>
+            <p>Ko uporabnik pritisne na gumb Preberi podatke o uporabniki se mu prikažeta dva okna. In sicer okno, kjer lahko dodaja svoje meritve in okno, kjer se mu pokažejo pretekle meritve. Z gumbom graf lahko te podatke pregleda
+            tudi na grafu. Če se z miško prestavimo na graf, se prikaže točno koliko je bila teža v določeni meritvi.</p>
             <!-- KONEC: Master/detail načrtovalski vzorec -->
           </div>
         </div>

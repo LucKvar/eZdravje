@@ -162,7 +162,7 @@ $(document).ready(function() {
  * V primeru uspešne akcije izpiši sporočilo s pridobljenim EHR ID, sicer
  * izpiši napako.
  */
-function kreirajEHRzaBolnika() {
+function kreirajEHRzaUporabnika() {
 	sessionId = getSessionId();
 
 	var ime = $("#kreirajIme").val();
@@ -330,6 +330,39 @@ function dodajToCookie() {
     }
 }
 
+
+/**
+ * Za podan EHR ID preberi demografske podrobnosti pacienta in izpiši sporočilo
+ * s pridobljenimi podatki (ime, priimek in datum rojstva).
+ */
+function preberiEHRodUporabnika() {
+	sessionId = getSessionId();
+
+	var ehrId = $("#preberiEHRid").val();
+
+	if (!ehrId || ehrId.trim().length == 0) {
+		$("#preberiSporocilo").html("<span class='obvestilo label label-warning " +
+      "fade-in'>Prosim vnesite zahtevan podatek!");
+	} else {
+		$.ajax({
+			url: baseUrl + "/demographics/ehr/" + ehrId + "/party",
+			type: 'GET',
+			headers: {"Ehr-Session": sessionId},
+	    	success: function (data) {
+				var party = data.party;
+				$("#preberiSporocilo").html("<span class='obvestilo label " +
+          "label-success fade-in'>Uporabnik '" + party.firstNames + " " +
+          party.lastNames + ", " + party.gender + "', ki se je rodil '" + party.dateOfBirth +
+          "'.</span>");
+			},
+			error: function(err) {
+				$("#preberiSporocilo").html("<span class='obvestilo label " +
+          "label-danger fade-in'>Napaka '" +
+          JSON.parse(err.responseText).userMessage + "'!");
+			}
+		});
+	}
+}
 /**
  * Za dodajanje vitalnih znakov pacienta je pripravljena kompozicija, ki
  * vključuje množico meritev vitalnih znakov (EHR ID, datum in ura,
